@@ -1,0 +1,1 @@
+The normalization exercise in this folder can be used as additional lecture material, for review, or as a pair exercise.

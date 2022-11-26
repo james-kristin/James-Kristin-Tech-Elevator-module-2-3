@@ -35,7 +35,7 @@ public class JdbcProjectDao implements ProjectDao {
 	@Override
 	public List<Project> getAllProjects() {
 		List<Project> projects = new ArrayList<>();
-		String sql = "SELECT project_id, name, from_date, to_date FROM project ";
+		String sql = "SELECT project_id, name, from_date, to_date FROM project;";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 		while (results.next()) {
 			projects.add(mapRowToProject(results));
@@ -46,7 +46,7 @@ public class JdbcProjectDao implements ProjectDao {
 	@Override
 	public Project createProject(Project newProject) {
 		Project project = newProject;
-		String createProjectSql = "INSERT INTO project (name, from_date, to_date) VALUES (?, ?, ?) RETURNING project_id";
+		String createProjectSql = "INSERT INTO project (name, from_date, to_date) VALUES (?, ?, ?) RETURNING project_id;";
 		int projectId = jdbcTemplate.queryForObject(createProjectSql, int.class, newProject.getName(), newProject.getFromDate(), newProject.getToDate());
 		newProject.setId(projectId);
 		return newProject;
@@ -54,11 +54,11 @@ public class JdbcProjectDao implements ProjectDao {
 
 	@Override
 	public void deleteProject(int projectId) {
-		String deleteProjectEmployeeSql = "DELETE FROM project_employee WHERE project_id = ?";
+		String deleteProjectEmployeeSql = "DELETE FROM project_employee WHERE project_id = ?;";
 		int numberOfRowsDeleted = jdbcTemplate.update(deleteProjectEmployeeSql, projectId);
-		String deleteTimeSheetSql = "DELETE FROM timesheet WHERE project_id = ?";
+		String deleteTimeSheetSql = "DELETE FROM timesheet WHERE project_id = ?;";
 		numberOfRowsDeleted = jdbcTemplate.update(deleteTimeSheetSql, projectId);
-		String deleteProjectSql = "DELETE FROM project WHERE project_id = ?";
+		String deleteProjectSql = "DELETE FROM project WHERE project_id = ?;";
 		numberOfRowsDeleted = jdbcTemplate.update(deleteProjectSql, projectId);
 		if (numberOfRowsDeleted == 1) {
 			System.out.println("Project was safely deleted");

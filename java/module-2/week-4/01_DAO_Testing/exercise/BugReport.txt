@@ -1,43 +1,43 @@
 Bug 1
 -----
 Test that demonstrates problem:
-
+    updated_timesheet_has_expected_values_when_retrieved
 Expected output:
-
+    setting billable to false updates to false
 Actual output:
-
+    setting billable to false returned true
 How did you fix this bug?
-
+    setting billable in the SQL update statement
 
 Bug 2
 -----
 Test that demonstrates problem:
-
+    getBillableHours_returns_correct_total
 Expected output:
-
+    only hours that are billable
 Actual output:
-
+    all hours whether or not they are billable
 How did you fix this bug?
-
+    Add a condition to the where clause so that it only returns results if billable is true
 
 Bug 3
 -----
 Test that demonstrates problem:
-
+    getTimesheetsByEmployeeId_returns_list_of_all_timesheets_for_employee
 Expected output:
-
+    a list of timesheets with a size of 2
 Actual output:
-
+    a list of timesheets with a size of 1
 How did you fix this bug?
-
+    change the if statement to a while statement because the list would always stop after 1 due to the if statement
 
 Bug 4
 -----
 Test that demonstrates problem:
-
+    getTimesheetsByProjectId_returns_list_of_all_timesheets_for_project()
 Expected output:
-
+    a list of timesheets with a size of 3
 Actual output:
-
+    a list of timesheets with a size of 2
 How did you fix this bug?
-
+    changed the where clause to filter by project_id rather than employee_id

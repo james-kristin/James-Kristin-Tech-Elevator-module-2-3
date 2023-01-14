@@ -41,6 +41,7 @@ public class AuthenticationController {
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
+
         boolean rememberMe = (loginDto.isRememberMe() == null) ? false : loginDto.isRememberMe();
         String jwt = tokenProvider.createToken(authentication, rememberMe);
 

@@ -1,0 +1,3 @@
+-- 2. Select the name of the publisher with the most books published that are not out of print.
+-- Select the number of books published by them (name the column 'books_in_print').
+-- (1 row)

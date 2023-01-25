@@ -12,7 +12,7 @@ import java.util.Set;
  * Contains information about the user - their id, username, address information,
  * password (hashed) and authorities (user roles).
  */
-public class User {
+public class  User {
 
    private int id;
    private String username;

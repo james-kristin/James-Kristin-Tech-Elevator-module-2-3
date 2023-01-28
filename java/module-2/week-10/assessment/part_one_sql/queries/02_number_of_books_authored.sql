@@ -3,3 +3,8 @@
 -- Tip: make sure to add a space between the author's first and last names.
 -- (16 rows)
 
+SELECT p.first_name || ' ' || p.last_name AS author, count(*) AS num_books
+FROM person p 
+JOIN book_author ba on p.person_id = ba.author_id
+GROUP BY author 
+ORDER BY num_books DESC, author;

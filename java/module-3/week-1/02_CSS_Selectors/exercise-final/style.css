@@ -1,0 +1,84 @@
+* {
+  box-sizing: border-box;
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: rgba(192, 192, 192, 0.1);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+aside {
+  position: fixed;
+  border-right: 1px solid rgba(0, 173, 238, 0.4);
+  height: 100vh; /* or height: 100% */
+  width: 200px;
+}
+
+aside img {
+  height: 120px; /* or width: 120px */
+  display: block; /* required if using margin: 0 auto; optional if specifying margin-left */
+  margin: 0 auto; /* or margin-left: 40px */
+}
+
+aside li {
+  text-align: center;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(0, 173, 238, 0.4);
+  width: 80%;
+  margin: 0 auto; /* or margin-left: 20px; or margin-right: 20px; */
+  list-style: none;
+  padding: 16px 0;
+}
+
+aside li a {
+  font-weight: bold;
+  color: #00ADEE;
+  text-decoration: none;
+}
+
+aside li:first-child { /* or aside li:first-child a */
+  text-decoration: underline;
+}
+
+main {
+  margin-left: 200px;
+  padding-left: 20px; /* or padding-left: 220px; and no margin set */
+  padding-right: 20px;
+}
+
+header img {
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+img.banner {
+  width: 100%;
+}
+
+section div {
+  width: 33%;
+  display: inline-block;
+  padding: 0 10px;
+  margin-top: 10px;
+}
+
+section h2 {
+  color: #8CC36F;
+}
+
+section h2 i {
+  margin-right: 10px; /* or padding-right */
+}
+
+section div#what-we-do, section div#our-work {
+  border-right: solid 1px rgba(170, 239, 135, 0.8);
+}

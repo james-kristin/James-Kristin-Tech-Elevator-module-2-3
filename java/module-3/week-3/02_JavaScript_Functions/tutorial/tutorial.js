@@ -5,7 +5,9 @@
  *
  * @returns {boolean} true
  */
-
+ function turnOn() {
+  return true;
+}
 /**
  * Create a function called returnsName.
  *
@@ -13,7 +15,9 @@
  *
  * @returns {string} your name
  */
-
+  function returnsName() {
+    return "James Kristin";
+  }
 /**
  * Create a function called returnGivenParameter that takes a
  * single parameter and then returns it.
@@ -21,7 +25,9 @@
  * @param {any} thing any value
  * @returns {any} the parameter that we were given
  */
-
+function returnGivenParameter(thing) {
+  return thing;
+}
 /**
  * Now create a function called takeOptionalParameter
  * that takes a single parameter and
@@ -31,7 +37,9 @@
  * @param {any} [thing=0] any value
  * @returns {any} the parameter given, or 0 if none is given
  */
-
+function takeOptionalParameter(thing = 0) {
+  return thing;
+}
 /**
  * Write an anonymous function in the filter that will
  * remove all numbers that are double digits.
@@ -45,7 +53,9 @@
  */
 function filterArrayToOnlySingleDigitNumbers(arrayToFilter) {
   return arrayToFilter.filter(
-    // WRITE CODE HERE
+    (element) => {
+      return element < 10 && element > -10;
+    }
   );
 }
 
@@ -61,7 +71,9 @@ function filterArrayToOnlySingleDigitNumbers(arrayToFilter) {
  */
 function mapArrayToDoubleAllNumbers(arrayToDouble) {
   return arrayToDouble.map(
-    // WRITE CODE HERE
+    (element) => {
+      return element * 2;
+    }
   );
 }
 
@@ -78,7 +90,9 @@ function mapArrayToDoubleAllNumbers(arrayToDouble) {
  */
 function reduceArrayToFindProduct(arrayToMultiply) {
   return arrayToMultiply.reduce(
-    // WRITE CODE HERE
+    (currentResult, element) => {
+      return currentResult * element;
+    }
   );
 }
 
@@ -91,7 +105,9 @@ function reduceArrayToFindProduct(arrayToMultiply) {
  */
 function filterStringArrayForSon(arrayToFilter) {
   return arrayToFilter.filter(
-    // WRITE CODE HERE
+    (element) => {
+      return element.includes('son');
+    }
   );
 }
 
@@ -104,7 +120,9 @@ function filterStringArrayForSon(arrayToFilter) {
  */
 function makeNamesAllCaps(arrayToCapitalize) {
   return arrayToCapitalize.map(
-    // WRITE CODE HERE
+    (element) => {
+      return element.toUpperCase();
+    }
   );
 }
 
@@ -118,7 +136,14 @@ function makeNamesAllCaps(arrayToCapitalize) {
  *
  * Also be sure to document the return type and what it's returning.
  */
-
+/**
+ * Convert temperatures between celsius and fahrenheit 
+ * 
+ * @param {number} temperature temperature measured in degrees
+ * @param {string} temperatureUnit temperature unit for Fahrenheit(F) or Celsius (C)
+ * @param {boolean} [includeUnit] = determines if unit should be included in return value
+ * @returns {string} converted temperature in either fahrenheit or celsius
+ */
 function convertTemperature(temperature, temperatureUnit, includeUnit = false) {
   let convertedTemp = 0;
   let convertedUnit = 'F';

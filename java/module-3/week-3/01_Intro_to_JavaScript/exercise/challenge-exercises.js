@@ -15,21 +15,21 @@
             let differentNum = 0;
             const evenArray = [];
             const oddArray = [];
-
-            for (const num of numArray) {
-                if (num % 2 === 0) {
-                    evenArray.push(num);
+            
+            for (let i = 0; i < numArray.length; i++) {
+                if (numArray[i] % 2 === 0) {
+                    evenArray.push(i+1);
                 } else {
-                    oddArray.push(num);
+                    oddArray.push(i+1);
                 }
             }
-            if (oddArray.length === 1 ) {
-                differentNum = oddArray[0] + 1;
+
+            if (evenArray.length === 1) {
+                differentNum = evenArray[0];
             } else {
-                differentNum = evenArray[0] +1;
+                differentNum = oddArray[0];
             }
             return differentNum;
-            
         }
 /*
 2. **titleCase** Write a function that will convert a string into title case, given an optional 

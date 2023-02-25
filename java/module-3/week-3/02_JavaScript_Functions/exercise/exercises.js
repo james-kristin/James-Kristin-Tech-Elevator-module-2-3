@@ -159,3 +159,14 @@ function findLargest(searchArray) {
  *
  * Read the tests to verify you have the correct behavior.
  */
+function getSumOfSubArrayValues(arrArray) {
+    return arrArray.reduce(
+        (previousElement, currentElement) => {
+            return previousElement + currentElement.reduce( 
+                (previousSubElement, currentSubElement) => {
+                    return previousSubElement + currentSubElement;
+                }
+            )
+        }
+    )
+}

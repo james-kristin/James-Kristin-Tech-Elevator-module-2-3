@@ -1,6 +1,7 @@
 // reverse a string
 const string = "hello world"
 
+
 // find the bug
 const age = 5
 

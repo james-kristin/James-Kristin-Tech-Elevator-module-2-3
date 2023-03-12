@@ -62,4 +62,22 @@ let productService = {
     return this.allProducts;
   },
 
+  getProductById(id) {
+    if (id === 1) {
+      return this.allProducts[0];
+    } else if (id === 2) {
+      return this.allProducts[1];
+    }else if (id === 3) {
+      return this.allProducts[2];
+    }else if (id === 4) {
+      return this.allProducts[3];
+    }else if (id === 5) {
+      return this.allProducts[4];
+    }else if (id === 6) {
+      return this.allProducts[5];
+    }else if (id === 7) {
+      return this.allProducts[6];
+    }
+  }
+
 };

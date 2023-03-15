@@ -11,12 +11,12 @@
     </thead>
     <tbody>
       <tr>
-        <td><input type="text" id="firstNameFilter"/></td>
-        <td><input type="text" id="lastNameFilter"/></td>
-        <td><input type="text" id="usernameFilter"/></td>
-        <td><input type="text" id="emailFilter"/></td>
+        <td><input type="text" id="firstNameFilter" v-model="search.firstName"/></td>
+        <td><input type="text" id="lastNameFilter" v-model="search.lastName"/></td>
+        <td><input type="text" id="usernameFilter" v-model="search.username"/></td>
+        <td><input type="text" id="emailFilter" v-model="search.emailAddress"/></td>
         <td>
-          <select id="statusFilter">
+          <select id="statusFilter" v-model="search.status">
             <option value="">Show All</option>
             <option value="Active">Active</option>
             <option value="Inactive">Inactive</option>
@@ -24,6 +24,14 @@
         </td>
       </tr>
       <!-- user listing goes here -->
+      <tr v-for="user in filteredList" v-bind:key="user.firstName"
+        v-bind:class="{ inactive: user.status === 'Inactive' }">
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.emailAddress }}</td>
+        <td>{{ user.status }}</td>
+      </tr>
     </tbody>
   </table>
 </template>
@@ -40,7 +48,25 @@ export default {
         { firstName: 'Ben', lastName: 'Carter', username: 'bcarter', emailAddress: 'bcarter@gmail.com', status: 'Active' },
         { firstName: 'Katie', lastName: 'Jackson', username: 'kjackson', emailAddress: 'kjackson@yahoo.com', status: 'Active' },
         { firstName: 'Mark', lastName: 'Smith', username: 'msmith', emailAddress: 'msmith@foo.com', status: 'Inactive' }
-      ]
+      ],
+      search: {
+        firstName: '',
+        lastName: '',
+        username: '',
+        emailAddress: '',
+        status: ''
+      }
+    }
+  },
+  computed: {
+    filteredList() {
+        return this.users.filter((user) => {
+          return user.firstName.toLowerCase().includes(this.search.firstName) &&
+          user.lastName.toLowerCase().includes(this.search.lastName) &&
+          user.username.toLowerCase().includes(this.search.username) && 
+          user.emailAddress.toLowerCase().includes(this.search.emailAddress) &&
+          user.status.includes(this.search.status);
+        });
     }
   }
 }
@@ -57,7 +83,7 @@ th {
 td {
   padding: 10px;
 }
-tr.disabled {
+tr.inactive {
   color: red;
 }
 input, select {

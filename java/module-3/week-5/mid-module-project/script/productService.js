@@ -78,6 +78,10 @@ let productService = {
     }else if (id === 7) {
       return this.allProducts[6];
     }
+  },
+
+  searchProducts(searchTerm) {
+      return this.allProducts.filter(searchTerm);
   }
 
 };

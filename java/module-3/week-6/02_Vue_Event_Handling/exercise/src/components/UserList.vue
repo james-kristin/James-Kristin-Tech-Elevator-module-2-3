@@ -15,7 +15,7 @@
       <tbody>
         <tr>
           <td>
-            <input type="checkbox" id="selectAll" />
+            <input type="checkbox" id="selectAll" v-model="selectAllChecked" v-on:change="selectAllUsers" />
           </td>
           <td>
             <input type="text" id="firstNameFilter" v-model="filter.firstName" />
@@ -44,7 +44,7 @@
           v-bind:class="{ disabled: user.status === 'Disabled' }"
         >
           <td>
-            <input type="checkbox" v-bind:id="user.id" v-bind:value="user.id" />
+            <input type="checkbox" v-model="user.isChecked" v-on:click="toggleSelectedUsers(user.id)" v-bind:id="user.id" v-bind:value="user.id" />
           </td>
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
@@ -52,38 +52,38 @@
           <td>{{ user.emailAddress }}</td>
           <td>{{ user.status }}</td>
           <td>
-            <button class="btnEnableDisable">Enable or Disable</button>
+            <button class="btnEnableDisable" v-on:click="flipStatus(user.id)">{{ user.status === 'Active' ? 'Disable' : 'Enable' }}</button>
           </td>
         </tr>
       </tbody>
     </table>
 
     <div class="all-actions">
-      <button>Enable Users</button>
-      <button>Disable Users</button>
-      <button>Delete Users</button>
+      <button :disabled="actionButtonDisabled" v-on:click="enableSelectedUsers">Enable Users</button>
+      <button :disabled="actionButtonDisabled" v-on:click="disableSelectedUsers">Disable Users</button>
+      <button :disabled="actionButtonDisabled" v-on:click="deleteSelectedUsers">Delete Users</button>
     </div>
 
-    <button>Add New User</button>
+    <button v-on:click="toggleForm">Add New User</button>
 
-    <form id="frmAddNewUser">
+    <form id="frmAddNewUser" v-show="showForm">
       <div class="field">
         <label for="firstName">First Name:</label>
-        <input type="text" name="firstName" />
+        <input type="text" name="firstName" v-model="newUser.firstName" />
       </div>
       <div class="field">
         <label for="lastName">Last Name:</label>
-        <input type="text" name="lastName" />
+        <input type="text" name="lastName" v-model="newUser.lastName" />
       </div>
       <div class="field">
         <label for="username">Username:</label>
-        <input type="text" name="username" />
+        <input type="text" name="username" v-model="newUser.username" />
       </div>
       <div class="field">
         <label for="emailAddress">Email Address:</label>
-        <input type="text" name="emailAddress" />
+        <input type="text" name="emailAddress" v-model="newUser.emailAddress" />
       </div>
-      <button type="submit" class="btn save">Save User</button>
+      <button type="submit" class="btn save" v-on:click.prevent="saveUser(newUser)">Save User</button>
     </form>
   </div>
 </template>
@@ -93,13 +93,16 @@ export default {
   name: "user-list",
   data() {
     return {
+      selectAllChecked: false,
       filter: {
         firstName: "",
         lastName: "",
         username: "",
         emailAddress: "",
-        status: ""
+        status: "",
+        isChecked: false
       },
+      showForm: false,
       nextUserId: 7,
       newUser: {
         id: null,
@@ -107,7 +110,8 @@ export default {
         lastName: "",
         username: "",
         emailAddress: "",
-        status: "Active"
+        status: "Active",
+        isChecked: false
       },
       users: [
         {
@@ -116,7 +120,8 @@ export default {
           lastName: "Smith",
           username: "jsmith",
           emailAddress: "jsmith@gmail.com",
-          status: "Active"
+          status: "Active",
+          isChecked: false
         },
         {
           id: 2,
@@ -124,7 +129,8 @@ export default {
           lastName: "Bell",
           username: "abell",
           emailAddress: "abell@yahoo.com",
-          status: "Active"
+          status: "Active",
+          isChecked: false
         },
         {
           id: 3,
@@ -132,7 +138,8 @@ export default {
           lastName: "Best",
           username: "gbest",
           emailAddress: "gbest@gmail.com",
-          status: "Disabled"
+          status: "Disabled",
+          isChecked: false
         },
         {
           id: 4,
@@ -140,7 +147,8 @@ export default {
           lastName: "Carter",
           username: "bcarter",
           emailAddress: "bcarter@gmail.com",
-          status: "Active"
+          status: "Active",
+          isChecked: false
         },
         {
           id: 5,
@@ -148,7 +156,8 @@ export default {
           lastName: "Jackson",
           username: "kjackson",
           emailAddress: "kjackson@yahoo.com",
-          status: "Active"
+          status: "Active",
+          isChecked: false
         },
         {
           id: 6,
@@ -156,15 +165,95 @@ export default {
           lastName: "Smith",
           username: "msmith",
           emailAddress: "msmith@foo.com",
-          status: "Disabled"
+          status: "Disabled",
+          isChecked: false
+          
         }
-      ]
+      ],
+      selectedUserIDs: [],
     };
   },
   methods: {
     getNextUserId() {
       return this.nextUserId++;
-    }
+    },
+    toggleForm() {
+      if (this.showForm) {
+        this.showForm = false;
+      } else {
+        this.showForm = true;
+      }
+    },
+    saveUser(newUser) {
+      this.newUser.id = this.getNextUserId();
+      this.users.push(newUser);
+      this.newUser = {
+        id: null,
+        firstName: "",
+        lastName: "",
+        username: "",
+        emailAddress: "",
+        status: "Active"
+      }
+    },
+    flipStatus(id) {
+      this.users[id - 1].status = this.users[id - 1].status === 'Active' ? 'Disabled' : 'Active';
+    },
+    toggleSelectedUsers(id) {
+      const checkedUsers = this.users.filter((user) => {
+        return user.isChecked === true;
+      })
+
+      if (checkedUsers.length === 5) {
+        this.selectAllChecked = true;
+      }
+      
+      if (this.selectedUserIDs.includes(id)) {
+        this.selectedUserIDs = this.selectedUserIDs.filter( (identification) => {
+          this.users[identification - 1].isChecked = false;
+          return identification !== id;
+        })
+      } else {
+        this.selectedUserIDs.push(id);
+        this.users[id-1].isChecked = true;
+      }
+    },
+    enableSelectedUsers() {
+      const enabledUsers = this.users.filter((user) => {
+        return this.selectedUserIDs.includes(user.id)
+      });
+      return enabledUsers.forEach(element => {
+        element.status = 'Enabled'
+      });
+      
+    },
+    disableSelectedUsers() {
+      const disabledUsers = this.users.filter((user) => {
+        return this.selectedUserIDs.includes(user.id)
+      });
+      return disabledUsers.forEach(element => {
+        element.status = 'Disabled'
+      });
+    },
+    deleteSelectedUsers() {
+      this.users = this.users.filter((user) => {
+        return !this.selectedUserIDs.includes(user.id)
+      });
+    },
+    selectAllUsers() {
+      this.selectedUserIDs = this.users.map((user) => {
+        return user.id
+      });
+      if (this.selectAllChecked) {
+        this.selectedUserIDs.forEach((id) => {
+        this.users[id-1].isChecked = true;
+      });
+      } else {
+        this.selectedUserIDs.forEach((id) => {
+        this.users[id-1].isChecked = false;
+      });
+      }
+    } 
   },
   computed: {
     filteredList() {
@@ -203,6 +292,9 @@ export default {
         );
       }
       return filteredUsers;
+    },
+    actionButtonDisabled() {
+      return this.selectedUserIDs.length === 0;
     }
   }
 };

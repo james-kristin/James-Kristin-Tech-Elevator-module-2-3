@@ -38,36 +38,37 @@ describe('Component Communication Exercise', () => {
   describe("Step Three Tests", () => {
     it('mark read/unread buttons should exist', () => {
       cy.get(".mark-read, .mark-unread").should("exist");
-      cy.get(".mark-read, .mark-unread").should("have.length", 4);
-    });
+      cy.get(".mark-read:visible, .mark-unread:visible")
+        .should("have.length", 4);
+    })
 
     it('cards should have read class', () => {
       cy.get(".card.read").should("have.length", 2);
     })
 
     it('should mark book as read when "Mark Read" button is pressed', () => {
-      cy.get(".card:has(> .mark-read)")
+      cy.get(".card:has(> .mark-read:visible)")
         .first()
         .as("card");
       cy.get("@card")
         .find(".mark-read")
         .click();
       cy.get("@card")
-        .find(".mark-read")
+        .find(".mark-read:visible")
         .should("not.exist");
       cy.get("@card").should("have.class", "read");
       cy.get("@card").find(".mark-unread");
     });
 
     it('should mark book as unread when "Mark Unread" button is pressed', () => {
-      cy.get(".card:has(> .mark-unread)")
+      cy.get(".card:has(> .mark-unread:visible)")
         .first()
         .as("card");
       cy.get("@card")
         .find(".mark-unread")
         .click();
       cy.get("@card")
-        .find(".mark-unread")
+        .find(".mark-unread:visible")
         .should("not.exist");
       cy.get("@card").should("not.have.class", "read");
       cy.get("@card").find(".mark-read");
@@ -87,7 +88,7 @@ describe('Component Communication Exercise', () => {
       cy.get(".author-input").type("TEST AUTHOR");
       cy.get(".isbn-input").type("1111111111{enter}");
 
-      cy.contains(".card","TEST BOOK").as("card");
+      cy.contains(".card", "TEST BOOK").as("card");
 
       cy.get("@card").find(".book-title", "TEST BOOK");
       cy.get("@card").find(".book-author", "TEST AUTHOR");

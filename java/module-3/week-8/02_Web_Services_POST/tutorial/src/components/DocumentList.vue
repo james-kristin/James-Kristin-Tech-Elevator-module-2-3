@@ -39,7 +39,20 @@ export default {
       this.$router.push(`/document/${id}`);
     },
     deleteDocument(id) {
-      console.log(id);
+      docsService
+        .delete(id)
+        .then(response => {
+          if (response.status === 200) {
+           this.getDocuments();
+          }
+        })
+        .catch(error => {
+          if (error.response.status === 404) {
+            this.$router.push("/404");
+          } else {
+            console.error(error);
+         }
+      });
     },
     getDocuments() {
       docsService.list().then(response => {

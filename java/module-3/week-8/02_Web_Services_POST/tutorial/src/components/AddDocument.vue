@@ -25,6 +25,8 @@ import faker from "faker";
 
 const date = moment(new Date());
 
+import docsService from '../services/DocsService';
+
 export default {
   name: "add-document",
   data() {
@@ -40,7 +42,15 @@ export default {
     };
   },
   methods: {
-    saveDocument() {},
+    saveDocument() {
+      docsService
+        .create(this.document)
+        .then((response) => {
+          if (response.status === 201) {
+            this.$router.push("/");
+          }
+        });
+    },
     cancel() {
       this.$router.push("/");
     }

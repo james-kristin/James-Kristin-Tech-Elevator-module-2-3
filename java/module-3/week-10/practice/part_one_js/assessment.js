@@ -9,6 +9,18 @@
  * Example 3: filteredSum([]) --> 0
  */
 function filteredSum(arr) {
+    let sum = 0;
+
+    if (arr.length > 0) {
+        for (num of arr) {
+            if (num > 0 && num <= 100) {
+                sum += num;
+            }
+        }
+        return sum;
+    } else {
+        return sum;
+    }
 
 }
 
@@ -29,6 +41,43 @@ function filteredSum(arr) {
  *   }
  */
 function yearlyBookCount(year, bookArray) {
+    let pageCount = {
+        pagesFiction: 0,
+        pagesNonFiction: 0
+    }
+    let fictionArray = [];
+    let nonFictionArray = [];
+
+    if (bookArray.length > 0) {
+        for (book of bookArray) {
+            let bookDatesRead = book.datesRead;
+            let bookGenre = book.genres;
+            for (dateRead of bookDatesRead) {
+                let yearRead = dateRead.substring(dateRead.length - 4);
+                if (yearRead === year) {
+                    if (bookGenre.length > 0) {
+                        for (genre of bookGenre) {
+                            if (genre === "Fiction") {
+                                pageCount.pagesFiction += book.pageCount;
+                                break;
+                            } else  if (genre === "Non-Fiction"){
+                                pageCount.pagesNonFiction += book.pageCount;
+                                break;
+                            } else {
+                                pageCount.pagesNonFiction += book.pageCount;
+                            }
+                        }
+                    } else {
+                        pageCount.pagesNonFiction += book.pageCount;
+                    }
+                }
+            }
+        }
+        return pageCount;
+    } else {
+        return pageCount;
+    }
+    
 
 }
 

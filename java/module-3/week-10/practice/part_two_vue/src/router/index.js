@@ -26,7 +26,7 @@ const router = new Router({
       component: AuthorDetailsView,
     },
     {
-      path: '/books/details',
+      path: '/books/:bookId',
       name: 'bookDetails',
       component: BookDetailsView,
     },

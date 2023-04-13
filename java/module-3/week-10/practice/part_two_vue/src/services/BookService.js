@@ -14,6 +14,10 @@ export default {
     return axios.get(`/books-api/books/${bookId}`);
   },
 
+  getAuthorById(authorId) {
+    return axios.get(`/books-api/authors/${authorId}`);
+  },
+
   filterBooks(titleString, genresArray) {
     let qs = '';
     // Add title to query string if passed in

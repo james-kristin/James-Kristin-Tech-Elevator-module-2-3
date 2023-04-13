@@ -14,6 +14,16 @@
       <div class="info-property">
         <label>About:</label><p>{{author.about}}</p>
       </div>
+      <div class="info-property" >
+        <label >Select Books:</label>
+        <p>
+          <router-link class="book-title"
+              v-bind:to="{ name: 'bookDetails', params: {bookId: book.id} }"
+              v-for="book of author.books" v-bind:key="book.id">
+            {{book.title}}
+          </router-link>
+        </p>
+      </div>
     </section>
   </article>
 </template>
@@ -24,7 +34,8 @@ export default {
   props: ['author'],
   data() {
     return {
-      imageBaseUrl: process.env.VUE_APP_REMOTE_API
+      imageBaseUrl: process.env.VUE_APP_REMOTE_API,
+      book: {}
     }
   }
 }

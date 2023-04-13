@@ -63,6 +63,8 @@ export default {
   margin-bottom: 2rem;
   padding: 1rem 2rem;
   width: fit-content;
+  background-color: #C0B387;
+  border: 1px solid #30362F;
 }
 
 form {
@@ -106,6 +108,9 @@ button {
   margin-bottom: 0.5rem;
   margin-right: 0.5rem;
   width: 100px;
+}
+button[type="submit"] {
+  background: #E69C60;
 }
 
 select {

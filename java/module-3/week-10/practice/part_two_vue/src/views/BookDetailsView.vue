@@ -24,7 +24,7 @@ export default {
     return {
       error: null,
       isLoading: true,
-      bookId: 102230,
+      bookId: this.$route.params.bookId,
       bookData: {}
     }
   },

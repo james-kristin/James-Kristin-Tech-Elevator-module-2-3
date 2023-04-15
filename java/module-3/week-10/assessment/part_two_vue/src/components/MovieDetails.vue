@@ -62,10 +62,14 @@ article {
 .movie-poster {
   height: 400px;
   padding: 1.5rem;
+  background-color: #F9F6F0;
+  border: 3px solid #FF9000;
 }
 
 .movie-details {
   padding: 2.5rem;
+  background-color: #F9F6F0;
+  border: 3px solid #FF9000;
 }
 
 .movie-property {

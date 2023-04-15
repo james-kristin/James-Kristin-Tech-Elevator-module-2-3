@@ -25,7 +25,7 @@ export default {
       error: null,
       isLoading: true,
       // TODO - currently shows only movie 102230, Our Father
-      movieId: 102230,
+      movieId: this.$route.params.movieId,
       movieData: {}
     }
   },

@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import MovieService from '../services/MovieService';
 export default {
   data() {
     return {
@@ -40,6 +41,12 @@ export default {
       this.selectedGenreList=[];
     }
   },
+  created() {
+    MovieService.getMovieGenres()
+    .then(response => {
+      this.allGenres = response.data
+    });
+  }
 };
 </script>
 

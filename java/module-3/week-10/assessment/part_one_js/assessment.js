@@ -8,7 +8,14 @@
  * Example 4: filteredCount('A', []) --> 0
  */
 function filteredCount(matchStr, arr) {
+    let count = 0;
 
+    for (let char of arr) {
+        if (char === matchStr) {
+            count += 1;
+        }
+    }
+    return count;
 }
 
 /**
@@ -18,6 +25,16 @@ function filteredCount(matchStr, arr) {
  * Order objects have properties for state, status, weight, and cost.
  */
  function inProgressOrders(stateCode, orderArray) {
+     let count = 0;
+
+     for (let order of orderArray) {
+         if (order.state === stateCode) {
+             if (order.status === 'In-Progress') {
+                 count += 1;
+             }
+         }
+     }
+     return count;
 
 }
 
@@ -36,5 +53,20 @@ function filteredCount(matchStr, arr) {
  *   }
  */
 function orderVolume(stateCode, orderArray) {
+    let orderData = {
+        count: 0,
+        weight: 0,
+        sales: 0
+    }
 
+    for (let order of orderArray) {
+        if (order.state === stateCode) {
+            if (order.status === 'Delivered' || order.status === 'Shipped') {
+                orderData.count += 1;
+                orderData.weight += order.weight;
+                orderData.sales += order.cost;
+            }
+        }
+    }
+    return orderData;
 }

@@ -10,6 +10,10 @@ export default {
     return axios.get(`/movies-api/movies/${movieId}`);
   },
 
+  getMovieGenres() {
+    return axios.get(`/movies-api/genres`);
+  },
+
   filterMovies(titleString, genresArray) {
     let qs = '';
     // Add title to query string if passed in

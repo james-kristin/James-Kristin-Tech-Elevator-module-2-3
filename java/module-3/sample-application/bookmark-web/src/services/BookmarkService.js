@@ -5,10 +5,15 @@ import axios from 'axios';
  * All methods return a Promise so that the calling code can handle both success and 
  * error responses appropriately. 
  */
+
+const http = axios.create({
+  baseURL: "http://localhost:9000/bookmarks"
+})
+
 export default {
 
   getMyBookmarks() {
-    return axios.get('/bookmarks');
+    return http.get('');
   },
 
   getPublicBookmarks() {

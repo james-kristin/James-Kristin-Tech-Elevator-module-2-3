@@ -15,7 +15,7 @@ import NotificationList from '../components/NotificationList.vue';
 import EditProfileForm from "../components/EditProfileForm.vue"
 
 export default {
-  components: { EditProfileForm, NotificationList },
+  components: { EditProfileForm, NotificationList }
 };
 </script>
 

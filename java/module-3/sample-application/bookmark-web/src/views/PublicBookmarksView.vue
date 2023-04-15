@@ -48,6 +48,7 @@ export default {
       bookmarkService
         .searchPublicBookmarks(this.filter)
         .then((response) => {
+          console.log('response', response);
           this.bookmarks = response.data;
           this.isLoading=false;
         })

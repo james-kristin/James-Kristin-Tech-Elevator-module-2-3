@@ -16,6 +16,5 @@ export default {
 
   updateUserProfile(user) {
     return axios.put('/users', user)
-  }
-
+  },
 }
